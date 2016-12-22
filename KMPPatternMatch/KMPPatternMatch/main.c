@@ -18,7 +18,7 @@ size_t kmpmatch(char *text, char *pattern);
 int main(int argc, const char * argv[]) {
 
     char text[] = "aaabaadaabaaa";
-    char pattern[] = "aacaaa";
+    char pattern[] = "aabaaa";
     
     
     size_t pos = kmpmatch(text, pattern);
@@ -41,6 +41,7 @@ size_t kmpmatch(char *text, char *pattern) {
     failurefunction(pattern);
     
     while (i < n) {
+        printf("comparing pattern[%d] to text[%d]\n", j, i);
         if (pattern[j] == text[i]) {
             if (j == m-1) {
                 return i-m+1;
@@ -48,8 +49,10 @@ size_t kmpmatch(char *text, char *pattern) {
             ++i;
             ++j;
         } else if (j > 0) {
+            printf("\nShift f[%d] = %d\n", j-1,failfunc[j-1]);
             j = failfunc[j-1];
         } else {
+            printf("\n++i\n");
             ++i;
         }
     }
